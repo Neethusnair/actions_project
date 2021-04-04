@@ -10,7 +10,7 @@ env:
   GKE_CLUSTER: new-gke
   GKE_ZONE: us-central1-a
   ##DEPLOYMENT_NAME: app-test
-  IMAGE: login-docker
+  #IMAGE: login-docker
 
 jobs:
   setup-build-publish-deploy:
@@ -79,6 +79,6 @@ jobs:
     - name: Deploy Application 
       run: |-
         kubectl apply -f welcome.yaml
-        kubectl wait --timeout=90s --for=condition=ready pod -l app=list
+        #kubectl wait --timeout=90s --for=condition=ready pod -l app=list
         kubectl rollout status deployment list-deployment
         kubectl get services -o wide    
