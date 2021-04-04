@@ -19,7 +19,7 @@ spec:
         image: neethusnair/list-docker:latest # image we pushed
         #imagePullPolicy: Never
         ports:
-        - containerPort: 3000
+        - containerPort: 4000
         env:
         - name: MONGO_USERNAME
           valueFrom:
