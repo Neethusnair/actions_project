@@ -3,6 +3,6 @@ WORKDIR /app
 COPY package.json /app
 RUN npm install
 COPY . /app
-CMD node app.js
+CMD node welcome.js
 EXPOSE 4000
 
