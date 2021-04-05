@@ -23,7 +23,8 @@ app.set('view-engine', 'ejs')
 // to read input to forms
 app.use(express.urlencoded({ extended: false}))
 
-app.get('/list',auth, async(req, res) => {
+//app.get('/list',auth, async(req, res) => {
+app.get('/list', async(req, res) => {
 
     try{
 
