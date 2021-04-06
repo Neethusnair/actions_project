@@ -31,6 +31,11 @@ spec:
             secretKeyRef:
               name: mongodb-secret
               key: mongo-root-password
+        - name: ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: auth-token      
         - name: MONGO_HOSTNAME
           valueFrom: 
             configMapKeyRef:
@@ -45,7 +50,7 @@ spec:
           valueFrom: 
             configMapKeyRef:
               name: app-configmap
-              key: database_db
+              key: database_db      
 ---
 apiVersion: v1
 kind: Service
