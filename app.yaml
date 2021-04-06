@@ -24,17 +24,17 @@ spec:
         - name: MONGO_USERNAME
           valueFrom:
             secretKeyRef:
-              name: mongodb-secret
+              name: secret
               key: mongo-root-username
         - name: MONGO_PASSWORD
           valueFrom: 
             secretKeyRef:
-              name: mongodb-secret
+              name: secret
               key: mongo-root-password
         - name: ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
-              name: mongodb-secret
+              name: secret
               key: auth-token      
         - name: MONGO_HOSTNAME
           valueFrom: 
