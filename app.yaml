@@ -31,6 +31,11 @@ spec:
             secretKeyRef:
               name: mongodb-secret
               key: mongo-root-password
+        - name: ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: auth-token      
         - name: MONGO_HOSTNAME
           valueFrom: 
             configMapKeyRef:
