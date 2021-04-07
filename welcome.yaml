@@ -54,14 +54,8 @@ metadata:
 spec:
   selector:
     app: list   
-  type: NodePort
   ports:
     - protocol: TCP
       port: 4000
       targetPort: 4000
-      nodePort: 30001
-
-
-
-
 
