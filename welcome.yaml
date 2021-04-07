@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: list-deployment
   labels:
-    app: list
+    app: login
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: list
+      app: login
   template:
     metadata:
       labels: # labels to select/identify the deployment
-        app: list 
+        app: login 
     spec:     # pod spec                  
       containers: 
       - name: list
@@ -53,7 +53,7 @@ metadata:
   name: list-service
 spec:
   selector:
-    app: list   
+    app: login   
   ports:
     - protocol: TCP
       port: 4000
