@@ -51,11 +51,11 @@ spec:
             configMapKeyRef:
               name: app-configmap
               key: database_db
-        - name: HOSTNAME
-          valueFrom: 
-            configMapKeyRef:
-              name: app-configmap
-              key: list_hostname
+        #- name: HOSTNAME
+          #valueFrom: 
+            #configMapKeyRef:
+              #name: app-configmap
+              #key: list_hostname
         - name: PORT
           valueFrom: 
             configMapKeyRef:
