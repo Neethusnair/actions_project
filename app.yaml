@@ -68,7 +68,7 @@ metadata:
   name: login-service
 spec:
   selector:
-    name: login
+    app: login
   type: LoadBalancer  
   ports:
     - protocol: TCP
