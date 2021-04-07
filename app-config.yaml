@@ -9,4 +9,4 @@ data:
   database_db: "logins"
   #database_replicaset: "mongodb-deployment-8f6675bc5"
   list_port: "4000"
-  list_hostname: "list-service.default.svc.cluster.local"
+  #list_hostname: "list-service.default.svc.cluster.local"
