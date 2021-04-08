@@ -54,9 +54,10 @@ metadata:
 spec:
   selector:
     app: list
-  type: NodePort  
+  type: LoadBalancer  
   ports:
     - protocol: TCP
       port: 4000
       targetPort: 4000
+      nodePort: 30001
 
