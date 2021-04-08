@@ -69,10 +69,9 @@ metadata:
 spec:
   selector:
     app: login
-  type: LoadBalancer  
+  type: NodePort  
   ports:
     - protocol: TCP
       port: 80
       targetPort: 3000
-      nodePort: 30000
       
