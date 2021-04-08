@@ -7,13 +7,9 @@ metadata:
     kubernetes.io/ingress.class: "gce"
 spec:
   rules:
+  - host: nethusapp.com
   - http:
       paths:
-      - path: /*
         backend:
           serviceName: login-service
           servicePort: 3000
-      - path: /list
-        backend:
-          serviceName: list-service
-          servicePort: 4000
