@@ -68,9 +68,8 @@ metadata:
   name: login-service
 spec:
   selector:
-    app: login 
+    app: login  
   ports:
     - protocol: TCP
       port: 3000
       targetPort: 3000
-      
