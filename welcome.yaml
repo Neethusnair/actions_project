@@ -53,7 +53,8 @@ metadata:
   name: list-service
 spec:
   selector:
-    app: list  
+    app: list
+  type: NodePort  
   ports:
     - protocol: TCP
       port: 4000
