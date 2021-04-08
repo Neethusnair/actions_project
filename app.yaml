@@ -67,7 +67,7 @@ kind: Service
 metadata:
   name: login-service
 spec:
-    selector:
+  selector:
     app: login
   type: NodePort  
   ports:
