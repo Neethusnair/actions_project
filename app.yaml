@@ -67,8 +67,9 @@ kind: Service
 metadata:
   name: login-service
 spec:
-  selector:
-    app: login  
+    selector:
+    app: login
+  type: NodePort  
   ports:
     - protocol: TCP
       port: 3000
