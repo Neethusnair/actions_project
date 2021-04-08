@@ -81,4 +81,12 @@ jobs:
         kubectl apply -f welcome.yaml
         #kubectl wait --timeout=90s --for=condition=ready pod -l app=list
         kubectl rollout status deployment list-deployment
-        kubectl get services -o wide    
+        kubectl get services -o wide 
+        
+  #deploy ingress    
+   - name: Deploy Ingress
+     run: |-
+       kubectl apply -f my-ingress.yaml
+       kubectl get services -o wide     
+        
+        
