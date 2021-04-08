@@ -9,7 +9,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: new-gke
   GKE_ZONE: us-central1-a
-  #DEPLOYMENT_NAME: app-test
+  ##DEPLOYMENT_NAME: app-test
   #IMAGE: login-docker
 
 jobs:
@@ -84,9 +84,9 @@ jobs:
         kubectl get services -o wide 
         
   #deploy ingress    
-   - name: Deploy Ingress
-     run: |-
-       kubectl apply -f my-ingress.yaml
-       kubectl get services -o wide     
+    - name: Deploy Ingress 
+      run: |-
+        kubectl apply -f my-ingress.yaml
+        kubectl get services -o wide     
         
         
