@@ -7,11 +7,8 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 require('dotenv/config');
 
-
-
 app.use(express.json());
 app.use(cookieParser());
-
 
 // enable server to be able to use css and js files
 app.use(express.static('public'))
@@ -27,13 +24,11 @@ app.get('/login', (req, res) => {
     res.render('login.ejs');
 });
 
-
 app.get('/register', (req, res) => {
     res.render('register.ejs');
 });
 
 app.post('/login', async(req, res) => {
-
     const valmodel = await Model.findOne({email: req.body.email});
     if(!valmodel) return res.status(400).json({
         error: 'invalid email id'
@@ -43,15 +38,17 @@ app.post('/login', async(req, res) => {
         error: 'invalid password'
     });
 
+    // connect to list
+    const PORT = process.env.PORT;
+    
     // create JWT token
     const accessToken = jwt.sign({_id: valmodel._id }, process.env.ACCESS_TOKEN);
     res.cookie('jwt', accessToken, {httpOnly: true, maxAge: 1000 * 60 * 60 * 24});
     res.cookie('email', req.body.email);
-    res.status(201).json({user: valmodel._id});
+    res.status(201).json(PORT);
 });    
 
 app.post('/register', async(req, res) => {
-
     //Check if email already exist
     const emailPresent = await Model.findOne({email: req.body.email});
     if(emailPresent) return res.status(400).json({
@@ -67,26 +64,24 @@ app.post('/register', async(req, res) => {
         email: req.body.email,
         password: hashedPassword
     });
+    
+    // connect to list
+    const PORT = process.env.PORT;
+
+    // create JWT token
+    const accessToken = jwt.sign({_id: model._id }, process.env.ACCESS_TOKEN);
+    res.cookie('jwt', accessToken, {httpOnly: true, maxAge: 1000 * 60 * 60 * 24});
+    res.cookie('email', req.body.email);
 
     try{
         const savedModel = await model.save();
-        
-        // create JWT token
-        const accessToken = jwt.sign({_id: savedModel._id }, process.env.ACCESS_TOKEN);
-        res.cookie('jwt', accessToken, {httpOnly: true, maxAge: 1000 * 60 * 60 * 24});
-        res.cookie('email', req.body.email);
-        res.status(201).json({user: valmodel._id});
-        
-        res.json(savedModel);
+        res.json(PORT);
     }catch (err) {
         res.json({ message: err });
-    }
-      
+    }      
 });
 
-
 // Connect to DB
-
 const {
     MONGO_USERNAME,
     MONGO_PASSWORD,
@@ -99,9 +94,6 @@ const {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     serverSelectionTimeoutMS: 5000
-    //reconnectTries: Number.MAX_VALUE,
-    //reconnectInterval: 500,
-    //connectTimeoutMS: 10000,
   };
   
   const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
