@@ -31,18 +31,18 @@
                      <table class="centered" id="myTable">
                          <thead>
                              <tr>
-                                 <th>ID</th>
                                  <th>Name</th>
                                  <th>Email</th>
+                                 <th>ID</th>
                              </tr>
                              
                          </thead>
                          <tbody id="user-table-body">
                              <%userList.forEach(user => {%>
                                  <tr>
-                                     <th class="center-align" scope="row"><%=user._id %></th>
-                                     <td><%=user.name %></td>
-                                     <td><%=user.email %></td>
+                                     <th class="center-align" scope="row"><%=user.name %></th>
+                                     <td><%=user.email  %></td>
+                                     <td><%=user._id%></td>
                                  </tr>
                              <%})%>
                          </tbody>
