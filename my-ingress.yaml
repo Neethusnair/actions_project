@@ -14,3 +14,7 @@ spec:
         backend:
           serviceName: login-service
           servicePort: 3000
+      - path: /list
+        backend:
+          serviceName: list-service
+          servicePort: 4000    
