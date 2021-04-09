@@ -23,40 +23,34 @@ app.set('view-engine', 'ejs')
 // to read input to forms
 app.use(express.urlencoded({ extended: false}))
 
-//app.get('/list',auth, async(req, res) => {
-app.get('/list', async(req, res) => {
-
-    try{
-
-        const Models = await Model.find();
-        res.render('list.ejs',{
-           userList: Models
-        });
-        //res.json(Models);    
-    }catch (error) {
-        console.log(error);
-
-        res.json({ message: err });
+app.get('/welcome/lists', auth, async(req, res) => {  
+  try{
+    const Models = await Model.find();
+    res.render('list.ejs',{
+    userList: Models
+  });
+     //res.json(Models);    
+  }catch (error) {
+    console.log(error);
+    res.json({ message: err });
    } 
 });
 
 //Extract token from cookies
 function auth(req, res, next) {
-    const token = req.cookies.jwt;
-    if(!token) return res.status(401).send('No Token Available. You cannot view this page.');
+  const token = req.cookies.jwt;
+  if(!token) return res.status(401).send('No Token Available. You cannot view this page.');
 
-    try {
-        const verify = jwt.verify(token, process.env.ACCESS_TOKEN);
-        req.user = verify;
-        next();
-    } catch (err){
-        res.status(403).send('Invalid Token.You cannot view this page');
-    }
+  try {
+    const verify = jwt.verify(token, process.env.ACCESS_TOKEN);
+    req.user = verify;
+    next();
+  } catch (err){
+    res.status(403).send('Invalid Token.You cannot view this page');
+  }
 }
 
-
 // Connect to DB
-
 const {
     MONGO_USERNAME,
     MONGO_PASSWORD,
@@ -69,9 +63,6 @@ const {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     serverSelectionTimeoutMS: 5000
-    //reconnectTries: Number.MAX_VALUE,
-    //reconnectInterval: 500,
-    //connectTimeoutMS: 10000,
   };
   
   const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
