@@ -30,7 +30,12 @@ spec:
           valueFrom: 
             secretKeyRef:
               name: secret
-              key: mongo-root-password     
+              key: mongo-root-password 
+        - name: ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: auth-token       
         - name: MONGO_HOSTNAME
           valueFrom: 
             configMapKeyRef:
