@@ -71,28 +71,22 @@ jobs:
       run: |-
         kubectl apply -f app-config.yaml 
         kubectl apply -f app.yaml
-        #kubectl wait --timeout=90s --for=condition=ready pod -l app=login
-        #kubectl rollout status deployment login-deployment
+        kubectl wait --timeout=90s --for=condition=ready pod -l app=login
+        kubectl rollout status deployment login-deployment
         kubectl get services -o wide
    
    #deploy welcome image    
     - name: Deploy List
       run: |-
         kubectl apply -f welcome.yaml
-        #kubectl wait --timeout=90s --for=condition=ready pod -l app=list
-        #kubectl rollout status deployment list-deployment
+        kubectl wait --timeout=90s --for=condition=ready pod -l app=list
+        kubectl rollout status deployment list-deployment
         kubectl get services -o wide 
         
   #deploy ingress    
     - name: Deploy Ingress 
       run: |-
         kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.45.0/deploy/static/provider/cloud/deploy.yaml
-        #kubectl wait --timeout=90s --for=condition=ready pod -l app.kubernetes.io/name=ingress-nginx
-        #kubectl wait deploy/ingress-nginx-controller --for condition=available
-        #kubectl wait --for=condition=Ready deploy --all --all-namespaces
-        kubectl wait --timeout=90s --for=condition=ready pod -l app=login
-        kubectl wait --timeout=90s --for=condition=ready pod -l app=list
-        kubectl rollout status deployment list-deployment
         kubectl apply -f my-ingress.yaml
         kubectl get ingress    
         
