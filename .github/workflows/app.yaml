@@ -87,7 +87,7 @@ jobs:
     - name: Deploy Ingress 
       run: |-
         kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.45.0/deploy/static/provider/cloud/deploy.yaml
-        kubectl wait=30s
+        kubectl wait --timeout=90s --for=condition=ready pod/ingress-nginx-controller
         kubectl apply -f my-ingress.yaml
         kubectl get ingress    
         
