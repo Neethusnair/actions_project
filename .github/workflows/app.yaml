@@ -67,20 +67,20 @@ jobs:
         kubectl get services -o wide
         
     # Deploy docorized app image to the GKE cluster
-    - name: Deploy Application 
+    - name: Deploy Login 
       run: |-
         kubectl apply -f app-config.yaml 
         kubectl apply -f app.yaml
         #kubectl wait --timeout=90s --for=condition=ready pod -l app=login
-        kubectl rollout status deployment login-deployment
+        #kubectl rollout status deployment login-deployment
         kubectl get services -o wide
    
    #deploy welcome image    
-    - name: Deploy Application 
+    - name: Deploy List
       run: |-
         kubectl apply -f welcome.yaml
         #kubectl wait --timeout=90s --for=condition=ready pod -l app=list
-        kubectl rollout status deployment list-deployment
+        #kubectl rollout status deployment list-deployment
         kubectl get services -o wide 
         
   #deploy ingress    
@@ -92,6 +92,7 @@ jobs:
         #kubectl wait --for=condition=Ready deploy --all --all-namespaces
         kubectl wait --timeout=90s --for=condition=ready pod -l app=login
         kubectl wait --timeout=90s --for=condition=ready pod -l app=list
+        kubectl rollout status deployment list-deployment
         kubectl apply -f my-ingress.yaml
         kubectl get ingress    
         
