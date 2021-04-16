@@ -92,6 +92,7 @@ jobs:
            --selector=app.kubernetes.io/component=controller \
            --timeout=90s
         kubectl apply -f my-ingress.yaml
-        kubectl get ingress    
+        #kubectl get ingress    
+        kubectl get svc ingress-nginx-controller -n ingress-nginx
         
         
