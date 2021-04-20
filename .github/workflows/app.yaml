@@ -49,14 +49,14 @@ jobs:
        # docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
     
     # Set up istio
-    - name: Set up Istio
-      run: |-
-       curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.0 sh -
-       cd istio-1.9.0
-       export PATH=$PWD/bin:$PATH
-       istioctl install --set profile=demo -auto-approve
-       cd ~
-       kubectl label namespace default istio-injection=enabled
+    #- name: Set up Istio
+     # run: |-
+       #curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.0 sh -
+       #cd istio-1.9.0
+       #export PATH=$PWD/bin:$PATH
+       #istioctl install --set profile=demo -auto-approve
+       #cd ~
+       #kubectl label namespace default istio-injection=enabled
        
     # Set up kustomize
     - name: Set up Kustomize
