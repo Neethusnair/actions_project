@@ -51,7 +51,7 @@ jobs:
     # Set up istio
     - name: Set up Istio
       run: |-
-       curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.0 sh -
+       curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.0 sh - -auto-approve
        cd istio-1.9.0
        export PATH=$PWD/bin:$PATH
        istioctl install --set profile=demo
