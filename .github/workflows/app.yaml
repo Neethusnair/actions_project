@@ -47,7 +47,17 @@ jobs:
     #- name: Publish
      # run: |-
        # docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
-             
+    
+    # Set up istio
+    - name: Set up Istio
+      run: |-
+       curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.0 sh -
+       cd istio-1.9.0
+       export PATH=$PWD/bin:$PATH
+       istioctl install --set profile=demo
+       cd ~
+       kubectl label namespace default istio-injection=enabled
+       
     # Set up kustomize
     - name: Set up Kustomize
       run: |-
@@ -82,6 +92,15 @@ jobs:
         kubectl wait --timeout=90s --for=condition=ready pod -l app=list
         kubectl rollout status deployment list-deployment
         kubectl get services -o wide 
+        
+  #deploy gateway and virtual services
+  - name: Deploy gateway
+    run: |-
+      kubectl apply -f gateway.yaml
+      kubectl get svc -l=istio=ingressgateway -n istio-system
+      kubectl apply -f gateway.yaml
+      kubectl apply -f vs-login.yaml
+      kubectl apply -f vs-list.yaml
         
   #deploy ingress    
     #- name: Deploy Ingress 
