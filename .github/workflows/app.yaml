@@ -48,6 +48,7 @@ jobs:
     - name: Build docker image
       run: |-
         docker build ./authentication  -t  neethusnair/login1-docker
+        docker push neethusnair/login1-docker
     
     # Build the Docker image
     #- name: Build
