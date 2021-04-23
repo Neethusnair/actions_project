@@ -36,6 +36,14 @@ jobs:
     - run: |-
         gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
    
+    # Login to Docker
+    - name: Docker login
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    
     # Build the Docker image
     - name: Build docker image
       run: |-
