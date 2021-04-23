@@ -35,6 +35,12 @@ jobs:
     # Get the GKE credentials so we can deploy to the cluster
     - run: |-
         gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+   
+    # Build the Docker image
+    - name: Build docker image
+      run: |-
+        docker build ./authentication  -t  neethusnair/login1-docker
+    
     # Build the Docker image
     #- name: Build
      # run: |-
