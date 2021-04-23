@@ -36,19 +36,34 @@ jobs:
     - run: |-
         gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
    
-    # Login to Docker
-    - name: Docker login
+    ## Login to Docker
+    #- name: Docker login
+      #env:
+        #DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        #DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      #run: |
+          #docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    
+    ## Build the Docker image
+    #- name: Build docker image
+     # run: |-
+        #docker build ./authentication  -t  neethusnair/login1-docker
+        #docker push neethusnair/login1-docker
+    
+    
+    # Login to Jfrog
+    - name: Jfrog login
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        JFROG_USER: ${{ secrets.JFROG_USER }}
+        JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
       run: |
-          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+          docker login sreyo.jfrog.io -u $JFROG_USER -p $JFROG_PASSWORD
     
     # Build the Docker image
     - name: Build docker image
       run: |-
-        docker build ./authentication  -t  neethusnair/login1-docker
-        docker push neethusnair/login1-docker
+        docker build ./authentication  -t  sreyo.jfrog.io/ns-docker-dev-local/login-docker
+        docker push sreyo.jfrog.io/ns-docker-dev-local/login-docker
     
     # Build the Docker image
     #- name: Build
