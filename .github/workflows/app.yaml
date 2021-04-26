@@ -58,6 +58,7 @@ jobs:
         JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
       run: |
           docker login sreyo.jfrog.io -u $JFROG_USER -p $JFROG_PASSWORD
+          kubectl create secret generic jfrog-secret --from-file=.dockerconfigjson=.docker/config.json  --type=kubernetes.io/dockerconfigjson
     
     # Build the Docker image
     - name: Build docker image
