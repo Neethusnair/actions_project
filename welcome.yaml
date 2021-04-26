@@ -14,10 +14,14 @@ spec:
       labels: # labels to select/identify the deployment
         app: list
     spec:     # pod spec                  
+      imagePullSecrets:
+      - name: jfrog-secret
       containers: 
       - name: list
-        image: neethusnair/list-docker:latest # image we pushed
+        #image: neethusnair/login-docker:latest # image we pushed
+        image: sreyo.jfrog.io/ns-docker-dev-local/list-docker # image we pushed
         #imagePullPolicy: Never
+        imagePullPolicy: Always
         ports:
         - containerPort: 4000
         env:
