@@ -13,7 +13,9 @@ spec:
     metadata:
       labels: # labels to select/identify the deployment
         app: login  
-    spec:     # pod spec                  
+    spec:     # pod spec
+      imagePullSecrets:
+      - name: jfrog-secret
       containers: 
       - name: login
         #image: neethusnair/login-docker:latest # image we pushed
