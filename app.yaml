@@ -16,8 +16,10 @@ spec:
     spec:     # pod spec                  
       containers: 
       - name: login
-        image: neethusnair/login-docker:latest # image we pushed
+        #image: neethusnair/login-docker:latest # image we pushed
+        image: https://sreyo.jfrog.io/artifactory/ns-docker-dev-local/login-docker # image we pushed
         #imagePullPolicy: Never
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
         env:
