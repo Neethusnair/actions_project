@@ -9,6 +9,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: new-gke
   GKE_ZONE: us-central1-a
+  ######
 
 jobs:
   setup-build-publish-deploy:
