@@ -33,15 +33,15 @@ jobs:
     - run: |-
         gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
    
-#    # Set up istio
-#     - name: Set up Istio
-#       run: |-
-#        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.7.3 sh -
-#        cd istio-1.7.3
-#        export PATH=$PWD/bin:$PATH
-#        istioctl install --set profile=demo
-#        cd ~
-#        kubectl label namespace default istio-injection=enabled        
+   # Set up istio
+    - name: Set up Istio
+      run: |-
+       curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.7.3 sh -
+       cd istio-1.7.3
+       export PATH=$PWD/bin:$PATH
+       istioctl install --set profile=demo
+       cd ~
+       kubectl label namespace default istio-injection=enabled        
               
     # Login to Jfrog
     - name: Jfrog login
@@ -50,7 +50,7 @@ jobs:
         JFROG_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
       run: |
           docker login sreyo.jfrog.io -u $JFROG_USER -p $JFROG_PASSWORD
-          #kubectl create secret generic jfrog-secret --from-file=.dockerconfigjson=/home/runner/.docker/config.json  --type=kubernetes.io/dockerconfigjson
+          kubectl create secret generic jfrog-secret --from-file=.dockerconfigjson=/home/runner/.docker/config.json  --type=kubernetes.io/dockerconfigjson
     
        
     # Set up kustomize
