@@ -75,9 +75,10 @@ jobs:
     - name: Deploy Login 
       run: |-
         kubectl apply -f app-config.yaml 
+        kubectl rollout restart deploy login-deployment --for=condition=ready pod -l app=login
         kubectl apply -f app.yaml
         kubectl wait --timeout=90s --for=condition=ready pod -l app=login
-        kubectl rollout restart deploy login-deployment
+        #kubectl rollout restart deploy login-deployment
         kubectl rollout status deployment login-deployment
         #kubectl get services -o wide
    
