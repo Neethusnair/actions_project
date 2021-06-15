@@ -76,7 +76,7 @@ jobs:
       run: |-
         kubectl apply -f app-config.yaml 
         kubectl apply -f app.yaml
-        kubectl wait --timeout=90s --for=condition=ready pod -l app=login_v1
+        kubectl wait --timeout=90s --for=condition=ready pod -l app=login
         kubectl rollout status deployment login-deployment
         #kubectl get services -o wide
    
