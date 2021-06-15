@@ -27,7 +27,7 @@ jobs:
     # Build the Docker image
     - name: Build docker image
       run: |-
-        docker build ./authentication  -t  sreyo.jfrog.io/ns-docker-dev-local/login-docker
+        docker build ./authentication  -t  sreyo.jfrog.io/ns-docker-dev-local/login-docker:latest
         docker build ./welcome -t  sreyo.jfrog.io/ns-docker-dev-local/list-docker
         docker push sreyo.jfrog.io/ns-docker-dev-local/login-docker
         docker push sreyo.jfrog.io/ns-docker-dev-local/list-docker  
