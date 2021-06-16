@@ -79,7 +79,8 @@ jobs:
         #kubectl rollout restart deploy login-deployment --ignore-not-found 
         #kubectl delete deploy login-deployment --ignore-not-found
         #kubectl restart deploy login-deployment --ignore-not-found
-        kubectl apply -f app.yaml
+        #kubectl apply -f app.yaml
+        kubectl create -f app.yaml
         kubectl wait --timeout=90s --for=condition=ready pod -l app=login
         #kubectl rollout restart deploy login-deployment
         kubectl rollout status deployment login-deployment
