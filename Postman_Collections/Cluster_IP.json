@@ -21,7 +21,7 @@
           }
         }
       ],
-      "_postman_id": "30f90d6c-6bf8-44bd-85d1-49904acd25a1",
+      "id": "30f90d6c-6bf8-44bd-85d1-49904acd25a1",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -48,7 +48,7 @@
           }
         }
       ],
-      "_postman_id": "fc30b29f-0828-41c1-9f22-25d752e73421",
+      "id": "fc30b29f-0828-41c1-9f22-25d752e73421",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
@@ -68,14 +68,14 @@
             "id": "da0f5f02-543f-4596-a226-edba26d2b0f0",
             "exec": [
               "pm.test(\"Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
+              "    pm.response.to.have.status(401);",
               "});"
             ],
             "type": "text/javascript"
           }
         }
       ],
-      "_postman_id": "c9759494-3927-400d-b018-5f1e27d657df",
+      "id": "c9759494-3927-400d-b018-5f1e27d657df",
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       },
