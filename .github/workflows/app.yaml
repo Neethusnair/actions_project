@@ -11,7 +11,7 @@ env:
   GKE_ZONE: us-central1-a
 
 jobs:
-  setup-build-publish-deploy:
+  Job1:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
 
@@ -117,9 +117,9 @@ jobs:
         ##kubectl get ingress    
         #kubectl get svc ingress-nginx-controller -n ingress-nginx
         
-  Create_subdomian_in_CF:
-    needs: setup-build-publish-deploy
-    name: create subdomain
+  Job2:
+    needs: Job1
+    name: Create subdomain in Cloudflare
     runs-on: ubuntu-latest    
     
     steps:
@@ -164,3 +164,36 @@ jobs:
            -H "Content-Type: application/json" \
            --data '{"type":"A","name":"ns","content":"'${CLUSTER_IP}'","ttl":120,"priority":10,"proxied":true}'
            #--data '{"type":"A","name":"${{ github.head_ref }}","content":"'${CLUSTER_IP}'","ttl":120,"priority":10,"proxied":true}'
+
+  Job3:
+    needs: Job1
+    name: Newman Testing
+    runs-on: ubuntu-latest    
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: Install node
+      uses: actions/setup-node@v1
+        
+    # Runs a set of commands using the runners shell      
+    - name: Install Newman
+      run: |
+        npm install -g newman
+        npm install -g newman-reporter-htmlextra
+     
+    - name: Make dir for test result
+      run: mkdir Results
+        
+    - name: Run Collection  
+      run: newman run ./Postman_Collections/Cluster_IP.json
+
+    - name: Output Run Details
+      uses: actions/upload-artifact@v2
+      with:
+        name: RunReports
+        path: Results  
+ 
+ 
+ 
