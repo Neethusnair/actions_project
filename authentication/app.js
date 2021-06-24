@@ -20,7 +20,7 @@ app.set('view-engine', 'ejs')
 // to read input to forms
 app.use(express.urlencoded({ extended: false}))
 
-app.get('/login', (req, res) => {
+app.get('/', (req, res) => {
     res.render('login.ejs');
 });
 
@@ -28,7 +28,7 @@ app.get('/register', (req, res) => {
     res.render('register.ejs');
 });
 
-app.post('/login', async(req, res) => {
+app.post('/', async(req, res) => {
     const valmodel = await Model.findOne({email: req.body.email});
     if(!valmodel) return res.status(400).json({
         error: 'invalid email id'
