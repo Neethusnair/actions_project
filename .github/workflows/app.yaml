@@ -12,7 +12,7 @@ env:
 
 jobs:
   Job1:
-    name: Setup
+    name: Setup and Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -33,15 +33,6 @@ jobs:
     - run: |-
         gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
         
-  Job2:
-    needs: Job1
-    name: Deploy
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
    
    # Set up istio
     - name: Set up Istio
@@ -127,8 +118,8 @@ jobs:
         ##kubectl get ingress    
         #kubectl get svc ingress-nginx-controller -n ingress-nginx
         
-  Job3:
-    needs: Job2
+  Job2:
+    needs: Job1
     name: Create subdomain in Cloudflare
     runs-on: ubuntu-latest    
     
@@ -137,19 +128,19 @@ jobs:
       uses: actions/checkout@v2
       
       
-#     ## Setup gcloud CLI
-#     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-#       with:
-#         version: '290.0.1'
-#         service_account_key: ${{ secrets.GKE_SA_KEY }}
-#         project_id: ${{ secrets.GKE_PROJECT }}
+    ## Setup gcloud CLI
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '290.0.1'
+        service_account_key: ${{ secrets.GKE_SA_KEY }}
+        project_id: ${{ secrets.GKE_PROJECT }}
 
-#     # Configure Docker to use the gcloud command-line tool as a credential helper for authentication
-#     - run: |-
-#         gcloud --quiet auth configure-docker
-#     # Get the GKE credentials so we can deploy to the cluster
-#     - run: |-
-#         gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+    # Configure Docker to use the gcloud command-line tool as a credential helper for authentication
+    - run: |-
+        gcloud --quiet auth configure-docker
+    # Get the GKE credentials so we can deploy to the cluster
+    - run: |-
+        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
       
     - name: Update CloudFlare DNS with Cluster IP 
       run: |-
@@ -175,8 +166,8 @@ jobs:
            --data '{"type":"A","name":"ns","content":"'${CLUSTER_IP}'","ttl":120,"priority":10,"proxied":true}'
            #--data '{"type":"A","name":"${{ github.head_ref }}","content":"'${CLUSTER_IP}'","ttl":120,"priority":10,"proxied":true}'
 
-  Job4:
-    needs: Job3
+  Job3:
+    needs: Job2
     name: Newman Testing
     runs-on: ubuntu-latest    
     
