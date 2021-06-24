@@ -28,7 +28,7 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": "http://ns.sreyo.in/login"
+        "url": "http://ns.sreyo.in"
       },
       "response": []
     },
