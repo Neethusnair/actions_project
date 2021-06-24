@@ -28,7 +28,7 @@ $("form[name=login_form").submit(function(e) {
     var data = $form.serialize();
 
     $.ajax({
-        url: "/login",
+        url: "/",
         type : "POST",
         data: data,
         dataType: "json",   
