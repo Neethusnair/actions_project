@@ -5,7 +5,7 @@ metadata:
 spec:
   hosts:
 #    - "*"
-    -list.sreyo.in
+    - list.sreyo.in
   gateways:
     - gateway
   http:
