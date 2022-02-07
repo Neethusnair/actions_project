@@ -12,8 +12,8 @@ spec:
 #  - match:
 #    - uri:
 #        prefix: /welcome
-    route:
-    - destination:
-        host: list-service.default.svc.cluster.local
-        port:
-          number: 4000
+    - route:
+      - destination:
+          host: list-service.default.svc.cluster.local
+          port:
+            number: 4000
