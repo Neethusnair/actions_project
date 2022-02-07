@@ -4,13 +4,14 @@ metadata:
   name: list-vs
 spec:
   hosts:
-    - "*"
+#    - "*"
+    -list.sreyo.in
   gateways:
     - gateway
   http:
-  - match:
-    - uri:
-        prefix: /welcome
+#  - match:
+#    - uri:
+#        prefix: /welcome
     route:
     - destination:
         host: list-service.default.svc.cluster.local
